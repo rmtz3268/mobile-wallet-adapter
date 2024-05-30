@@ -55,17 +55,16 @@ jobs:
       #     adb root
       #     adb remount -R
 
-      - name: Make system writable
-        run: |
-          adb shell "mount -o rw,remount /"
+      # - name: Make system writable
+      #   run: |
+      #     adb shell "mount -o rw,remount /"
 
       - name: Push test file
         run: |
+          adb shell "mount -o rw,remount /"
           echo tralala > tralala.txt
-          adb wait-for-device
-          adb shell ls
-          adb shell ls /system
-          adb push tralala.txt /system/
+          adb shell ls /system/app
+          adb push tralala.txt /system/app
 
       - name: Unmount system
         run: |
@@ -73,4 +72,4 @@ jobs:
 
       - name: Check
         run: |
-          adb shell ls /product/etc/permissions/
+          adb shell ls /system/app
