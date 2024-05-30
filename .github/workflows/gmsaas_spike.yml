@@ -53,8 +53,7 @@ jobs:
       - name: Disable Verity
         run: |
           adb root
-          adb shell avbctl disable-verification 
-          adb reboot
+          adb remount -R
 
       # - name: Make system writable
       #   run: |
