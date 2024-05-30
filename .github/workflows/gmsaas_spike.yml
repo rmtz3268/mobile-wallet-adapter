@@ -3,12 +3,10 @@ name: GMSaaS Test
 on:
   push:
     branches: [ main ]
-    paths: [ '.github/**', 'android/**' ]
+    paths: [ '.github/**']
   pull_request:
     branches: [ main ]
-    paths: [ '.github/**', 'android/**' ]
-  release:
-    types: [ published ]
+    paths: [ '.github/**']
 
 jobs:
   test:
@@ -59,7 +57,6 @@ jobs:
           echo tralala > tralala.txt
           gmsaas instances list -q | xargs -n1 gmsaas instances -writeable-system
           adb shell am broadcast -a android.intent.action.CLOSE_SYSTEM_DIALOGS
-          adb root 2> /dev/null
-          adb remount
+          adb shell "mount -o rw,remount /"
           adb push tralala.txt "/product/etc/permissions/"
           adb shell "mount -o remount,ro /"
