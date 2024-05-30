@@ -64,8 +64,8 @@ jobs:
           echo tralala > tralala.txt
           adb wait-for-device
           adb shell ls
-          adb shell ls /product/etc/permissions/
-          adb push tralala.txt "/product/etc/permissions/"
+          adb shell ls /system
+          adb push tralala.txt /system/
 
       - name: Unmount system
         run: |
