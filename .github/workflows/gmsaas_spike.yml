@@ -55,8 +55,8 @@ jobs:
         run: |
           cd android
           echo tralala > tralala.txt
-          gmsaas instances list -q | xargs -n1 gmsaas instances -writeable-system
           adb shell am broadcast -a android.intent.action.CLOSE_SYSTEM_DIALOGS
           adb shell "mount -o rw,remount /"
           adb push tralala.txt "/product/etc/permissions/"
           adb shell "mount -o remount,ro /"
+          adb shell ls /product/etc/permissions/
