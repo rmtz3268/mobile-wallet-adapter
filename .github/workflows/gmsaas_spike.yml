@@ -50,13 +50,20 @@ jobs:
           password: ${{ secrets.GMSAAS_PASSWORD }}
           recipe_uuid: ${{ matrix.recipe_uuid }}
 
+      - name: Make system writable
+        run: |
+          adb shell "mount -o rw,remount /"
+
       # Run the tests
       - name: Run Android Integration Tests
         run: |
-          cd android
           echo tralala > tralala.txt
-          adb shell am broadcast -a android.intent.action.CLOSE_SYSTEM_DIALOGS
-          adb shell "mount -o rw,remount /"
           adb push tralala.txt "/product/etc/permissions/"
+          
+      - name: Remount system
+        run: |
           adb shell "mount -o remount,ro /"
+          
+      - name: Check
+        run: |
           adb shell ls /product/etc/permissions/
