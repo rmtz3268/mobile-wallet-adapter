@@ -50,21 +50,21 @@ jobs:
           password: ${{ secrets.GMSAAS_PASSWORD }}
           recipe_uuid: ${{ matrix.recipe_uuid }}
 
-      - name: Disable Verity
-        run: |
-          adb root
-          adb remount -R
-
-      # - name: Make system writable
+      # - name: Disable Verity
       #   run: |
-      #     adb shell "mount -o rw,remount /"
+      #     adb root
+      #     adb remount -R
+
+      - name: Make system writable
+        run: |
+          adb shell "mount -o rw,remount /"
 
       - name: Push test file
         run: |
           echo tralala > tralala.txt
           adb wait-for-device
-          adb root
-          adb remount
+          adb shell ls
+          adb shell ls /product/etc/permissions/
           adb push tralala.txt "/product/etc/permissions/"
 
       - name: Unmount system
