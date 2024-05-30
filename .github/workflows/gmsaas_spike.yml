@@ -2,7 +2,7 @@ name: GMSaaS Test
 
 on:
   push:
-    branches: [ main ]
+    branches: [ 'gmsaas-spike' ]
     paths: [ '.github/**']
   pull_request:
     branches: [ main ]
