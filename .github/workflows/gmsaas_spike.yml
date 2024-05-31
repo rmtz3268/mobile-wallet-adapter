@@ -61,8 +61,7 @@ jobs:
 
       - name: Push test file
         run: |
-          adb root
-          adb shell "mount -o rw,remount /"
+          adb shell "mount -o rw,remount /system"
           echo tralala > tralala.txt
           adb push tralala.txt /system/app
 
